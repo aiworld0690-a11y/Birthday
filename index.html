@@ -4491,7 +4491,8 @@
     { src: "https://files.catbox.moe/du31ne.jpg", caption: "Special times with you ✨" },
     { src: "https://files.catbox.moe/se3qxz.jpg", caption: "Forever cherished 🤍" },
     { src: "https://files.catbox.moe/g8866m.jpg", caption: "Your favourite vibe 🎶" },
-    { src: "https://files.catbox.moe/8lin9p.jpg", caption: "Here's to you, Selva Priya 🎉" }
+    { src: "https://files.catbox.moe/8lin9p.jpg", caption: "Here's to you, Selva Priya 🎉" },
+    { src: "https://files.catbox.moe/9n34i9.jpg", caption: "Unexpected friendship is the best one 🧿❤️" }
   ],
       music: "https://files.catbox.moe/sx16m3.mp3",
       musicVolume: 0.5
@@ -4572,6 +4573,7 @@
     const _s = JSON.parse(localStorage.getItem(LS_KEY) || "null");
     if (_s && _s.music && !_s.music.startsWith("http")) delete _s.music;
     if (_s && _s.personalMessage) delete _s.personalMessage;
+    if (_s && _s.photos) delete _s.photos;
     if (_s) localStorage.setItem(LS_KEY, JSON.stringify(_s));
   } catch(e) {}
   let stored = null;
