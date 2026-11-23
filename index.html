@@ -4326,7 +4326,7 @@
           <img class="l-star sticker sticker-twinkle" data-asset="assets/stickers/sticker-star.webp" alt=""
             aria-hidden="true">
           <p class="l-kicker">a letter, just for you</p>
-          <h2 class="letter-title" id="t7" tabindex="-1">For you, <span data-bind="birthdayName">Selva Priya</span></h2>
+          <h2 class="letter-title" id="t7" tabindex="-1">For You, Selva Priya (Momo)</h2>
           <svg class="l-squiggle" viewBox="0 0 160 12" aria-hidden="true">
             <path d="M2 7c12-8 20 6 32 0s20-8 32 0 20 6 32 0 20-8 32 0 16 4 26-1" />
           </svg>
@@ -4469,14 +4469,7 @@
       birthdayDate: "24 November",
       senderName: "Someone Special",
       memoryMessage: "Here’s to all the laughs, chaos, late-night talks and little moments.",
-      personalMessage:
-        "Happy birthday, you wonderful human.\n\n" +
-        "I wanted to make you something that felt a little like you — warm, a bit silly, and full of tiny surprises. So here it is: a small corner of the internet that exists only because you do.\n\n" +
-        "Thank you for every late-night talk, every ridiculous inside joke, every time you showed up without being asked. You make ordinary days feel like something worth remembering.\n\n" +
-        "This year, I hope you get the slow mornings, the loud laughs, the good news you’ve been waiting for, and at least one perfect slice of cake.\n\n" +
-        "Whatever you wished for back there — I hope it finds you soon. And if it takes a little while, I’ll be right here, cheering the loudest.\n\n" +
-        "Happy birthday. Today is all yours.",
-      // 3–6 photos. Plain paths work too: "assets/photos/me-and-you.jpg"
+      personalMessage: "Happy Birthday, My Friend! \ud83c\udf82\u2764\ufe0f\n\nI wanted to make something special for you, something that makes you feel happy and smile whenever you read it. \ud83d\ude0a\n\nEppavum indha maariye happy-ah, smile-oda iru. Enna marandhudadha! Naan eppavume unna marakka maaten. \u2764\ufe0f\n\nNee eppavume enkitta pesitte iru. Naan unnodaya indha kutty kutty sandaigal poduradha romba miss panniduven. \ud83d\ude05 Adhukaga en mela kovama irundhaalum, pesaama irukaadha. One day kooda pesaama irukka mudiyadhu. Edha irundhaalum vandhu enkitta pesidu.\n\nUnna enakku romba pudikkum. Nee enakku friend-ah kidaichadhu naan lucky-nu dhaan ninaikkiren. Unkitta naan neraya advantage eduthuttuirukke;, sometimes over-ah kooda pesiruppen and eadu achi paniiruppennun manasula vachikaam.Please mannichidu. \u2764\ufe0f\n\nMathapadi, nee eppavume ippadiye happy-ah iru. Un life romba nalla irukkanum. Unakku pidichadhellam unakku kidaikkanum.\n\nAnd today, unakku interview irukku la? All the very best! Nalla pannuva, don't worry. Un future full-ah success-um happiness-um irukkanum. You deserve all the good things! \u2728\n\nUn marriage-ku enna koopduviya? \ud83d\ude02 Marriage aprm pasuvaiya ella nu   theriyala so adu vara pakalam.. Adhellam future-la paathukkalam! \ud83d\ude02\u2764\ufe0f\n\nOnce again, Happy Birthday, Selva Priya (Momo)! \ud83e\udd73\n\nEppavume ippadiye sirichitte iru. Un smile-um, namma friendship-um eppavume ippadiye irukkanum.\n\nStay happy, stay blessed, and never change! \u2764\ufe0f",
       photos: [
     { src: "https://files.catbox.moe/0sycd5.jpg", caption: "Happy Birthday, Selva Priya 🌸" },
         { src: "https://files.catbox.moe/4euvtx.jpg", caption: "Dreamy moments 🌷" },
@@ -4578,6 +4571,7 @@
       try {
     const _s = JSON.parse(localStorage.getItem(LS_KEY) || "null");
     if (_s && _s.music && !_s.music.startsWith("http")) delete _s.music;
+    if (_s && _s.personalMessage) delete _s.personalMessage;
     if (_s) localStorage.setItem(LS_KEY, JSON.stringify(_s));
   } catch(e) {}
   let stored = null;
