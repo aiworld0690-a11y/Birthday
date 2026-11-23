@@ -4430,7 +4430,7 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <audio id="bgm" loop preload="none"></audio>
+  <audio id="bgm" loop preload="auto" src="https://files.catbox.moe/7w73bm.mp3"></audio>
 
   <script type="application/json" id="bs-preset">{}</script>
   <script>
@@ -4577,7 +4577,12 @@
         return out;
       }
 
-      let stored = null;
+      try {
+    const _s = JSON.parse(localStorage.getItem(LS_KEY) || "null");
+    if (_s && _s.music && !_s.music.startsWith("http")) delete _s.music;
+    if (_s) localStorage.setItem(LS_KEY, JSON.stringify(_s));
+  } catch(e) {}
+  let stored = null;
       if (!window.__BS_HOSTED__) {
         try { stored = JSON.parse(localStorage.getItem(LS_KEY) || "null"); } catch (e) { }
       }
@@ -4728,8 +4733,10 @@
 
         function src() {
           if (songBlob) { if (!songUrl) songUrl = URL.createObjectURL(songBlob); return songUrl; }
-          if (data.musicData) return data.musicData;
-          return asset(data.music || defaults.music);
+          if (data && data.musicData) return data.musicData;
+          const m = (data && data.music) || (defaults && defaults.music) || "https://files.catbox.moe/7w73bm.mp3";
+          if (typeof m === "string" && m.startsWith("http")) return m;
+          return asset(m) || "https://files.catbox.moe/7w73bm.mp3";
         }
         function load() {
           const was = !el.paused;
@@ -4756,11 +4763,19 @@
           }, 50);
         }
         function play() {
-          if (!el.src) el.src = src();
-          el.volume = 0;
-          const p = el.play();
+          if (!el.src || el.src === window.location.href) el.src = src();
+          const targetVol = clamp(+data.musicVolume || (defaults && defaults.musicVolume) || 0.85, 0.1, 1);
+          el.volume = targetVol;
           started = true;
-          if (p && p.then) p.then(() => fadeTo(clamp(+data.musicVolume || defaults.musicVolume, 0, 1))).catch(() => { ui(); });
+          const p = el.play();
+          if (p && p.then) {
+            p.then(() => {
+              ui();
+            }).catch((err) => {
+              console.warn("Autoplay audio waiting for tap:", err);
+              ui();
+            });
+          }
         }
         function pause() { el.pause(); }
         function toggleMusic() { unlock(); if (el.paused) { wanted = true; play(); } else { wanted = false; pause(); } }
@@ -4770,7 +4785,16 @@
         }
         function autoStart() { if (wanted && el.paused) play(); }
         el.addEventListener("play", ui); el.addEventListener("pause", ui);
-        el.addEventListener("error", () => { if (started) { ui(); toast("The song couldn’t load — the surprise still works without it."); } });
+        el.addEventListener("error", () => {
+          if (!el.dataset.fallback) {
+            el.dataset.fallback = "1";
+            el.src = "assets/music/birthday.mp3";
+            el.load();
+            if (started) el.play().catch(() => {});
+          } else if (started) {
+            ui();
+          }
+        });
         btn.addEventListener("click", toggleMusic);
         muteBtn.addEventListener("click", toggleMute);
 
