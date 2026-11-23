@@ -4430,7 +4430,7 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <audio id="bgm" loop preload="auto" src="https://files.catbox.moe/7w73bm.mp3"></audio>
+  <audio id="bgm" loop preload="auto" src="https://files.catbox.moe/sx16m3.mp3"></audio>
 
   <script type="application/json" id="bs-preset">{}</script>
   <script>
@@ -4501,7 +4501,7 @@
     { src: "https://files.catbox.moe/g8866m.jpg", caption: "Your favourite vibe 🎶" },
     { src: "https://files.catbox.moe/8lin9p.jpg", caption: "Here's to you, Selva Priya 🎉" }
   ],
-      music: "https://files.catbox.moe/7w73bm.mp3",
+      music: "https://files.catbox.moe/sx16m3.mp3",
       musicVolume: 0.5
     };
 
@@ -4733,9 +4733,9 @@
         function src() {
           if (songBlob) { if (!songUrl) songUrl = URL.createObjectURL(songBlob); return songUrl; }
           if (data && data.musicData) return data.musicData;
-          const m = (data && data.music) || (defaults && defaults.music) || "https://files.catbox.moe/7w73bm.mp3";
+          const m = (data && data.music) || (defaults && defaults.music) || "https://files.catbox.moe/sx16m3.mp3";
           if (typeof m === "string" && m.startsWith("http")) return m;
-          return asset(m) || "https://files.catbox.moe/7w73bm.mp3";
+          return asset(m) || "https://files.catbox.moe/sx16m3.mp3";
         }
         function load() {
           const was = !el.paused;
