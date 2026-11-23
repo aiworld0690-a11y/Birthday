@@ -4305,7 +4305,7 @@
 
         <div class="video-card rv rv-3" style="width: min(100%, 460px); margin: 32px auto 20px; background: #fff; padding: 14px; border-radius: 12px; box-shadow: 0 14px 28px -12px rgba(62,48,64,.35); text-align: center;">
           <p style="font-family: var(--hand); font-size: 1.4rem; color: var(--pink); margin-bottom: 10px;">A special animated video for you 🎬✨</p>
-          <video controls playsinline preload="metadata" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.15); background: #000;" src="https://files.catbox.moe/30rjsf.mp4">
+          <video id="specialVideo" controls playsinline preload="metadata" onplay="if(window._pauseBgm)window._pauseBgm();else document.getElementById('bgm').pause();" onpause="if(window._resumeBgm)window._resumeBgm();" onended="if(window._resumeBgm)window._resumeBgm();" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.15); background: #000;" src="https://files.catbox.moe/30rjsf.mp4">
             Your browser does not support the video tag.
           </video>
         </div>
@@ -4832,6 +4832,17 @@
         };
         return { load, play, pause, toggleMusic, toggleMute, autoStart, unlock, sfx, ui, get muted() { return muted; } };
       })();
+      
+      window._pauseBgm = () => Sound.pause();
+      window._resumeBgm = () => { if (!Sound.muted) Sound.play(); };
+
+      const vEl = $("#specialVideo") || $("video");
+      if (vEl) {
+        vEl.addEventListener("play", () => { Sound.pause(); });
+        vEl.addEventListener("pause", () => { if (!Sound.muted) Sound.play(); });
+        vEl.addEventListener("ended", () => { if (!Sound.muted) Sound.play(); });
+      }
+
       const sfx = Sound.sfx;
 
       /* ═════════ confetti (tiny canvas engine, no library) ═════════ */
